@@ -1,4 +1,4 @@
-<?php echo form_open('registration/index'); ?>
+<?php echo form_open('registration/index', array('id' => 'registration')); ?>
 
 <label for="username">Username</label>
 <input type="text" name="username">
