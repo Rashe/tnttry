@@ -1,3 +1,3 @@
-<p>--- footer template ---</p>
+</section><!-- main -->
 </body>
 </html>

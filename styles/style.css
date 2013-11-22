@@ -1,0 +1,8 @@
+/* style.css - main styles */
+html, body{
+    height: 100%;
+}
+section#main{
+    height: 100%;
+    background: #E5E5E5;
+}
