@@ -24,9 +24,25 @@
 
 #bottomHeader nav{
     display: block;
+    text-align: center;
+    padding-top: 14px;
+}
+
+#bottomHeader nav ul{
+    display: inline-block;
 }
 
 #bottomHeader nav ul li{
     display: inline-block;
+}
+
+#bottomHeader nav ul li a{
+    color: #737373;
+    text-decoration: none;
+    padding: 12px 12px;
+}
+
+#bottomHeader nav ul li a:hover{
+    color: #262626;
 }
 

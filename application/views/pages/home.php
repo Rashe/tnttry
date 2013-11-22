@@ -1,2 +1,2 @@
 <?php
-    echo '<p>--- home page ---</p>';
+    echo 'home.php табы просто для визуализации';

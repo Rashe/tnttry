@@ -2,6 +2,7 @@
 <html>
 <head>
     <title><?php echo $title ?> - Our cool site</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('styles/reset.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('styles/header.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('styles/style.css'); ?>">
@@ -11,15 +12,14 @@
 <body>
 <header>
     <div id="topHeader">
-        <a href="" class="logo">LOGO</a>
+        <a href="<?php echo base_url(); ?>" class="logo">LOGO</a>
     </div>
     <div id="bottomHeader">
         <nav>
             <ul>
-                <li>All</li>
-                <li>Category A</li>
-                <li>Category B</li>
-                <li>Category C</li>
+                <li><a href="<?php echo base_url(); ?>">Home</a></li>
+                <li><a href="<?php echo base_url(); ?>about">About</a></li>
+                <li><a href="<?php echo base_url(); ?>admin">Admin</a></li>
             </ul>
         </nav>
     </div>
