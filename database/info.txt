@@ -1,0 +1,3 @@
+Every time you have to import or export the data base to your local playground.
+
+localhost/phpmyadmin
