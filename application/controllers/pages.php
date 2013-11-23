@@ -16,9 +16,13 @@ class Pages extends CI_Controller {
 
         $data['title'] = ucfirst($page); // Capitalize the first letter
 
+        $header_template = ($page == 'admin') ? 'header_admin':'header';
+        $footer_template = ($page == 'admin') ? 'footer_admin':'footer';
+
         $this->load->helper('url');
-        $this->load->view('templates/header', $data);
+
+        $this->load->view('templates/'.$header_template, $data);
         $this->load->view('pages/'.$page, $data);
-        $this->load->view('templates/footer', $data);
+        $this->load->view('templates/'.$footer_template, $data);
     }
 }
