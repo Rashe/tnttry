@@ -18,8 +18,8 @@
         <nav>
             <ul>
                 <li><a href="<?php echo base_url(); ?>">Home</a></li>
-                <li><a href="<?php echo base_url(); ?>about">About</a></li>
-                <li><a href="<?php echo base_url(); ?>admin">Admin</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/about">About</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/admin">Admin</a></li>
             </ul>
         </nav>
     </div>
