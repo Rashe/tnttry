@@ -19,6 +19,7 @@
             <ul>
                 <li><a href="<?php echo base_url(); ?>">Home</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/about">About</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/registration">Registration</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/admin">Admin</a></li>
             </ul>
         </nav>

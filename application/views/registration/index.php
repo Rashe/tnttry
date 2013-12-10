@@ -1,10 +1,10 @@
-<?php echo form_open('registration/index', array('id' => 'registration')); ?>
+<?php echo form_open('registration', array('id' => 'registration'), array('antiBot' => '')); ?>
 
 <label for="username">Username</label>
 <input type="text" name="username">
 
 <label for="email">Email</label>
-<input type="text" name="email">
+<input type="email" name="email">
 
 <label for="password">Password</label>
 <input type="text" name="password">
