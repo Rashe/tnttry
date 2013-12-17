@@ -1,16 +1,37 @@
-<?php echo form_open('registration', array('id' => 'registration'), array('antiBot' => '')); ?>
+<?php
+echo form_open('registration', array('id' => 'registration'), array('antiBot' => '')) .
 
-<label for="username">Username</label>
-<input type="text" name="username">
+form_fieldset() .
+form_label('Username', 'username') .
+form_input(array(
+    'name' => 'username'
+)) .
+form_fieldset_close() .
 
-<label for="email">Email</label>
-<input type="email" name="email">
+form_fieldset() .
+form_label('Email', 'email') .
+form_input(array(
+    'name' => 'email',
+    'type' => 'email',
+    'placeholder' => 'example@domain.com'
+)) .
+form_fieldset_close() .
 
-<label for="password">Password</label>
-<input type="text" name="password">
+form_fieldset() .
+form_label('Password', 'password') .
+form_input(array(
+    'name' => 'password'
+)) .
+form_fieldset_close() .
 
-<?php echo validation_errors(); ?>
+form_fieldset() .
+form_checkbox('tc', 'accept', false) .
+form_label('Terms & Conditions', 'tc') .
+form_fieldset_close() .
 
-<input type="submit" name="submit" value="Create account">
+form_submit('submit', 'Create account') .
 
-</form>
+form_close();
+
+validation_errors();
+
