@@ -1,5 +1,7 @@
 <?php
-echo form_open('registration', array('id' => 'registration'), array('antiBot' => '')) .
+echo '<div id="validationErrors">' . validation_errors() . '</div>' .
+
+form_open('registration', array('id' => 'registration'), array('antiBot' => '')) .
 
 form_fieldset() .
 form_label('Username', 'username') .
@@ -33,5 +35,4 @@ form_submit('submit', 'Create account') .
 
 form_close();
 
-validation_errors();
 

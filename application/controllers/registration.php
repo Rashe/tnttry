@@ -27,7 +27,7 @@ class Registration extends CI_Controller {
         }
         else
         {
-            $this->registration->create_account();
+            //$this->registration->create_account();
             $this->load->view('registration/success', $data);
         }
         $this->load->view('templates/footer', $data);
