@@ -48,9 +48,9 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
+$db['default']['hostname'] = '127.0.0.1';
+$db['default']['username'] = 'govno1';
+$db['default']['password'] = 'govno2';
 $db['default']['database'] = 'tnttry';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
@@ -67,3 +67,23 @@ $db['default']['stricton'] = FALSE;
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
+
+
+
+
+//// DB connection checking (DO NOT REMOVE)
+//echo '<pre>';
+//print_r($db['default']);
+//echo '</pre>';
+//
+//echo 'Connecting to database: ' .$db['default']['database'];
+//$dbh=mysql_connect
+//(
+//    $db['default']['hostname'],
+//    $db['default']['username'],
+//    $db['default']['password'])
+//or die('Cannot connect to the database because: ' . mysql_error());
+//mysql_select_db ($db['default']['database']);
+//
+//echo '<br />   Connected OK:'  ;
+//die( 'file: ' .__FILE__ . ' Line: ' .__LINE__);
