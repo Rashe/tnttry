@@ -22,6 +22,7 @@
                 <li><a href="<?php echo base_url(); ?>index.php/registration">Registration</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/login">Login</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/admin">Admin</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/user_settings">Settings</a></li>
             </ul>
         </nav>
     </div>
