@@ -1,7 +1,7 @@
 <?php
 echo '<div id="login_block">' . validation_errors() . '</div>' .
 
-    form_open('login', array('id' => 'login')) .
+    form_open('login') .
     form_fieldset() .
     form_label('Email', 'email') .
     form_input(array(

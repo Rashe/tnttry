@@ -39,6 +39,7 @@
 */
 
 $route['registration'] = 'registration';
+$route['login'] = 'login';
 $route['(:any)'] = 'pages/view/$1';
 $route['default_controller'] = "pages/view";
 //$route['404_override'] = '';

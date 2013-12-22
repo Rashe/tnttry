@@ -12,11 +12,13 @@ class Registration extends CI_Controller {
 
     public function index()
     {
-//        if(($this->session->userdata('user_name')!=""))
-//        {
-//            $this->welcome();
-//            return;
-//        }
+        if(($this->session->userdata('user_name')!=""))
+        {
+            $this->load->view('templates/header');
+            $this->load->view('pages/home');
+            $this->load->view('templates/footer');
+            return;
+        }
 
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -31,7 +33,8 @@ class Registration extends CI_Controller {
         $this->load->view('templates/header', $data);
         if ($this->form_validation->run() === FALSE)
         {
-            $this->load->view('registration/index', $data);
+
+            $this->load->view('pages/registration', $data);
         }
         else
         {

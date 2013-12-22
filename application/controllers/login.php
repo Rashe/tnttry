@@ -15,35 +15,27 @@ class Login extends CI_Controller {
     {
         if(($this->session->userdata('user_name')!=""))
         {
+            $this->load->view('templates/header');
             $this->load->view('pages/home');
+            $this->load->view('templates/footer');
             return;
         }
-        $this->load->view('templates/login', $data);
 
-    }
+        $this->load->helper('form');
+        $this->load->library('form_validation');
 
-    public function login()
-    {
-        $email=$this->input->post('email');
+        $this->form_validation->set_rules('email', 'Email', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
 
-        $password=hash('sha256', $this->input->post('password') . $this->input->post('email'));
+        $this->load->view('templates/header');
+            $email=$this->input->post('email');
 
-        $result=$this->user_model->login($email,$password);
-        if($result) $this->load->view('pages/home');
-        else        $this->load->view('pages/home');
-    }
+            $password=hash('sha256', $this->input->post('password') . $this->input->post('email'));
 
-    public function logout()
-    {
-        $newdata = array(
-            'user_id'   =>'',
-            'user_name'  =>'',
-            'user_email'     => '',
-            'logged_in' => FALSE,
-        );
-        $this->session->unset_userdata($newdata );
-        $this->session->sess_destroy();
-        $this->index();
+            $result=$this->login_model->login($email,$password);
+            if($result) $this->load->view('pages/home');
+            else        $this->load->view('pages/login');
+        $this->load->view('templates/footer');
     }
 
 
