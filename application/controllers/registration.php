@@ -5,7 +5,7 @@ class Registration extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('registration_model');
+        $this->load->model('usersession_model');
 
 
     }
@@ -39,7 +39,7 @@ class Registration extends CI_Controller {
         else
         {
 
-            $this->registration_model->create_account();
+            $this->usersession_model->create_account();
             $this->load->view('pages/home');
 //            $this->load->view('registration/success', $data);
         }
