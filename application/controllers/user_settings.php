@@ -40,7 +40,7 @@ class User_settings extends CI_Controller {
 
             $data['userall']=$this->userinfo_model->get_alluserdata();
 
-            $this->load->view('pages/user_settings', $data);
+            $this->load->view('templates/user_settings', $data);
         }
         else
         {

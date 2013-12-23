@@ -34,7 +34,7 @@ class Login extends CI_Controller {
 
             $result=$this->usersession_model->login($email,$password);
             if($result) $this->load->view('pages/home');
-            else        $this->load->view('pages/login');
+            else        $this->load->view('templates/login');
         $this->load->view('templates/footer');
     }
 
