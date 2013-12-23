@@ -40,6 +40,7 @@
 
 $route['registration'] = 'registration';
 $route['login'] = 'login';
+$route['logout'] = 'logout';
 $route['user_settings'] = 'user_settings';
 $route['(:any)'] = 'pages/view/$1';
 $route['default_controller'] = "pages/view";

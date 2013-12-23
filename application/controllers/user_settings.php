@@ -38,9 +38,8 @@ class User_settings extends CI_Controller {
         if ($this->form_validation->run() === FALSE)
         {
 
+            $data['userall']=$this->userinfo_model->get_alluserdata();
 
-            $data['username'] = $this->userinfo_model->get_username();
-            $data['email'] = $this->userinfo_model->get_email();
             $this->load->view('pages/user_settings', $data);
         }
         else
