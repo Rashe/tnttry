@@ -27,7 +27,6 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
 
-        $this->load->view('templates/header');
             $email=$this->input->post('email');
 
             $password=hash('sha256', $this->input->post('password') . $this->input->post('email'));
@@ -35,7 +34,6 @@ class Login extends CI_Controller {
             $result=$this->usersession_model->login($email,$password);
             if($result) $this->load->view('pages/home');
             else        $this->load->view('templates/login');
-        $this->load->view('templates/footer');
     }
 
 
