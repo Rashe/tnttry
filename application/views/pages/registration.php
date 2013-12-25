@@ -1,5 +1,5 @@
 <?php
-echo '<div id="validationErrors">' . validation_errors() . '</div>' .
+echo '<div id="validationErrors">' . validation_errors() . $error . '</div>' .
 
 form_open('registration', array('id' => 'registration'), array('antiBot' => '')) .
 
