@@ -37,9 +37,11 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-
+$route['make_post'] = 'make_post';
 $route['registration'] = 'registration';
 $route['login'] = 'login';
+$route['logout'] = 'logout';
+$route['user_settings'] = 'user_settings';
 $route['(:any)'] = 'pages/view/$1';
 $route['default_controller'] = "pages/view";
 //$route['404_override'] = '';

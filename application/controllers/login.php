@@ -6,7 +6,7 @@ class Login extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->helper('form');
-        $this->load->model('login_model');
+        $this->load->model('usersession_model');
 
 
     }
@@ -27,15 +27,13 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
 
-        $this->load->view('templates/header');
             $email=$this->input->post('email');
 
             $password=hash('sha256', $this->input->post('password') . $this->input->post('email'));
 
-            $result=$this->login_model->login($email,$password);
+            $result=$this->usersession_model->login($email,$password);
             if($result) $this->load->view('pages/home');
-            else        $this->load->view('pages/login');
-        $this->load->view('templates/footer');
+            else        $this->load->view('templates/login');
     }
 
 
