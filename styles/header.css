@@ -1,0 +1,48 @@
+#topHeader{
+    padding: 10px;
+    height: 60px;
+    box-sizing:border-box;
+}
+
+#topHeader a.logo{
+    display: inline-block;
+    padding: 10px 50px;
+    text-decoration: none;
+    color: #f5f5f5;
+    text-align: center;
+    border: 1px solid #f5f5f5;
+    line-height: 18px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+#bottomHeader{
+    height: 45px;
+    background: #f5f5f5;
+    box-sizing:border-box;
+}
+
+#bottomHeader nav{
+    display: block;
+    text-align: center;
+    padding-top: 14px;
+}
+
+#bottomHeader nav ul{
+    display: inline-block;
+}
+
+#bottomHeader nav ul li{
+    display: inline-block;
+}
+
+#bottomHeader nav ul li a{
+    color: #737373;
+    text-decoration: none;
+    padding: 12px 12px;
+}
+
+#bottomHeader nav ul li a:hover{
+    color: #262626;
+}
+
