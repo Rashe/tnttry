@@ -13,6 +13,7 @@
 <header>
     <div id="topHeader">
         <a href="<?php echo base_url(); ?>" class="logo">LOGO</a>
+        <div class="loginWrapper"><?php print $login_tpl; ?></div>
     </div>
     <div id="bottomHeader">
         <nav>

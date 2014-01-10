@@ -2,6 +2,7 @@
     padding: 10px;
     height: 60px;
     box-sizing:border-box;
+
 }
 
 #topHeader a.logo{
@@ -15,6 +16,15 @@
     font-size: 30px;
     font-weight: 700;
 }
+
+#topHeader .loginWrapper{
+    float:right;
+}
+
+
+
+
+
 
 #bottomHeader{
     height: 45px;
