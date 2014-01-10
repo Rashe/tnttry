@@ -9,3 +9,7 @@ section#main{
     background: #E5E5E5;
     padding: 30px;
 }
+
+.hidden{
+    display: none;
+}
