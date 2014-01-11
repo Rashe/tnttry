@@ -14,14 +14,11 @@ class Pages extends CI_Controller {
             show_404();
         }
 
+        $this->load->library('login');
+
         $data['title'] = ucfirst($page); // Capitalize the first letter
-
-//        $this->load->model('login');
-//        $this->login->index();
-
-        $data['login_tpl'] = $this->load->view('templates/login', $data, TRUE);
+        $data['login_tpl'] = $this->login->index();
         $data['reg_tpl'] = $this->load->view('pages/registration', $data, TRUE);
-//        $data['afterlogin_tpl'] = $this->load->view('templates/after_login', $data, TRUE);
 
         $this->load->helper('url');
 
