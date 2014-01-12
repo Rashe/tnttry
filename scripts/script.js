@@ -1,5 +1,6 @@
 $(document).ready(function(){
     window.Login.init();
+    window.AfterLogin.init();
     window.Registration.init();
 
 });
@@ -63,7 +64,7 @@ $(document).ready(function(){
                         var response = $.parseJSON(data);
 
                         $(selectors.wrapper).removeClass('ajaxLoader');
-
+                        document.cookie="username=John Smith; expires=Thu, 18 Dec 2013 12:00:00 GMT; path=/";
                         if(response.login == 1){
                             location.reload();
                         } else {
@@ -77,6 +78,37 @@ $(document).ready(function(){
     };
 
     window.Login = new Login();
+})();
+
+/**
+ * After Login
+ */
+(function(){
+    var AfterLogin = function(){
+        var _afterLogin = this;
+
+        var selectors = {
+            logoutBtn : '#logout'
+        };
+
+        this.init = function(){
+            _afterLogin.updateUserCookies();
+        };
+
+        this.updateUserCookies = function(){
+            $(selectors.logoutBtn).click(function(e){
+                $.ajax({
+                    url: 'login',
+                    data: {logout: true},
+                    success: function(data, textStatus, jqXHR){
+                        location.reload();
+                    }
+                });
+            });
+        };
+    };
+
+    window.AfterLogin = new AfterLogin();
 })();
 
 /**

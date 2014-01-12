@@ -29,8 +29,7 @@ class Login extends CI_Controller {
             $password=hash('sha256', $this->input->post('password') . $this->input->post('email'));
 
             $result=$this->usersession_model->login($email,$password);
-//            if($result) $this->load->view('pages/home', NULL, TRUE);
-//            else
+
             if(!$result) {
                 return $this->load->view('templates/login', NULL, TRUE);
             }
