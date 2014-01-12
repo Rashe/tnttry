@@ -19,8 +19,8 @@ $(document).ready(function(){
             wrapper:        '.loginWrapper',
             form:           '#login-form',
             submitBtn:      '#login-form input[type="submit"]',
-            emailInput: '#login-form input[type="email"]',
-            passwordInput: '#login-form input[type="password"]'
+            emailInput:     '#login-form input[type="email"]',
+            passwordInput:  '#login-form input[type="password"]'
         };
 
         var classes = {
@@ -42,10 +42,12 @@ $(document).ready(function(){
             }
         };
 
+        /**
+         * Submit login
+         */
         this.submit = function(){
             $(selectors.submitBtn).click(function(e){
                 e.preventDefault();
-                console.log('click');
                 $.ajax({
 //                    type: 'POST',
                     url: 'login',
@@ -58,24 +60,21 @@ $(document).ready(function(){
                         $(selectors.form).addClass('hidden');
                     },
                     success: function(data, textStatus, jqXHR){
-                        var response = JSON.stringify(data);
-//                        console.log('data: ' + JSON.stringify(data));
-//                        console.log('textStatus: ' + textStatus);
-//                        console.log('jqXHR: ' + JSON.stringify(jqXHR));
+                        var response = $.parseJSON(data);
 
                         $(selectors.wrapper).removeClass('ajaxLoader');
 
-                        if(response == ''){
-                            $(selectors.wrapper).html('Can\'t login');
-                        } else {
+                        if(response.login == 1){
                             location.reload();
+                        } else {
+                            $(selectors.form).removeClass('hidden');
                         }
                     }
 
                 });
             });
         };
-    }
+    };
 
     window.Login = new Login();
 })();

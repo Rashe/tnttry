@@ -26,7 +26,11 @@ class Login extends CI_Controller {
 
             $result=$this->usersession_model->login($email,$password);
 
-            echo $result;
+            if($result == 1){
+                echo '{"login": 1}';
+            } else {
+                echo '{"login": 0}';
+            }
     }
 
 
