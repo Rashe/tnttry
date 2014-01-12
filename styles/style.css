@@ -13,3 +13,12 @@ section#main{
 .hidden{
     display: none;
 }
+
+.ajaxLoader{
+    background: url(../assets/images/ajax_loader.gif) no-repeat center center;
+}
+
+.loginWrapper{
+    min-height:26px;
+    min-width: 300px;
+}

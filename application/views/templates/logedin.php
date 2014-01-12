@@ -1,4 +1,4 @@
 <?php
-echo 'Loged in, zashibis';
+echo $username.' | New Posts | Profile | LogoutBtn';
 
 

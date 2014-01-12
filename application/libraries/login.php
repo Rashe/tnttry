@@ -11,12 +11,11 @@ class Login extends CI_Controller {
 
     public function index()
     {
+        // If user logged in show loggedin form
         if(($this->session->userdata('user_name')!=""))
         {
-//            $this->load->view('templates/header');
-//            $this->load->view('pages/home');
-//            $this->load->view('templates/footer');
-            return $this->load->view('templates/logedin', NULL, TRUE);
+            $data['username'] = $this->session->userdata('user_name');
+            return $this->load->view('templates/logedin', $data, TRUE);
         }
 
         $this->load->helper('form');

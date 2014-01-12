@@ -1,7 +1,7 @@
 <?php
 echo '<div id="validationErrors">' . validation_errors() . /* $error . */'</div>' .
 
-form_open('registration', array('id' => 'registration'), array('antiBot' => '')) .
+form_open('registration', array('id' => 'registration-form'), array('antiBot' => '')) .
 
 form_fieldset() .
 form_label('Username', 'username') .
