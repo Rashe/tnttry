@@ -27,7 +27,12 @@ form_input(array(
 form_fieldset_close() .
 
 form_fieldset() .
-form_checkbox('tc', 'accept', false) .
+form_checkbox(array(
+    'name'        => 'tc',
+    'id'          => 'tc',
+    'value'       => 'accept',
+    'checked'     => false
+)) .
 form_label('Terms & Conditions', 'tc') .
 form_fieldset_close() .
 
