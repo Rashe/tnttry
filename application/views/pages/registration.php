@@ -1,5 +1,11 @@
 <?php
-echo '<div id="validationErrors">' . validation_errors() . /* $error . */'</div>' .
+
+$errors = '<div id="validationErrors"><p>' . validation_errors() . '</p>';
+foreach($error as $err){
+    $errors .= '<p>' . $err . '</p>';
+}
+$errors .= '</div>';
+echo $errors .
 
 form_open('registration', array('id' => 'registration'), array('antiBot' => '')) .
 

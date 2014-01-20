@@ -10,7 +10,7 @@ class Registration extends CI_Controller {
 
     public function index()
     {
-        if(($this->session->userdata('user_name')!=""))
+        if(($this->session->userdata('user_name') != ""))
         {
             $this->load->view('templates/header');
             $this->load->view('pages/home');
@@ -22,7 +22,7 @@ class Registration extends CI_Controller {
         $this->load->library('form_validation');
 
         $data['title'] = 'Registration';
-        $data['error'] = '';
+        $data['error'] = array();
 
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required');
@@ -30,21 +30,23 @@ class Registration extends CI_Controller {
         $this->form_validation->set_rules('tc', 'T&C', 'required');
 
         $this->load->view('templates/header', $data);
-        if ($this->form_validation->run() === FALSE)
-        {
+        if ($this->form_validation->run() === FALSE){
             $this->load->view('pages/registration', $data);
         }
         else
         {
             $ca = $this->registration_model->create_account();
 
-            if(is_array($ca) && isset($ca['error'])){
-                $data['error'] = $ca['msg'];
+            if(isset($ca[0]['error'])){
+                foreach($ca as $caa){
+                    $data['error'][] = $caa['msg'];
+                }
                 $this->load->view('pages/registration', $data);
+            } else {
+                $data['title'] = 'Successful registration';
+                $data['success'] = $ca;
+                $this->load->view('pages/success', $data);
             }
-
-            $this->load->view('pages/home');
-//            $this->load->view('registration/success', $data);
         }
         $this->load->view('templates/footer', $data);
     }

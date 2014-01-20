@@ -9,6 +9,9 @@ class Registration_model extends CI_Model {
 
     public function create_account()
     {
+        $ok = true;
+        $errors = array();
+
         $users = array(
             'username' => $this->input->post('username'),
             'email' => $this->input->post('email'),
@@ -20,16 +23,23 @@ class Registration_model extends CI_Model {
         );
 
         if($this->db->get_where('users', array('username' => $users['username']))->num_rows){
-            return array('error' => true, 'msg' => 'Username "' . $users['username'] . '" already exists!');
+            $errors[] = array('error' => true, 'msg' => 'Username "' . $users['username'] . '" already exists!');
+            $ok = false;
         }
         if($this->db->get_where('users', array('email' => $users['email']))->num_rows){
-            return array('error' => true, 'msg' => 'Email "' . $users['email'] . '" already exists!');
+            $errors[] = array('error' => true, 'msg' => 'Email "' . $users['email'] . '" already exists!');
+            $ok = false;
         }
 
-        $users_a = $this->db->insert('users', $users);
-        $users_stats_a =$this->db->insert('user_stats', $users_stats);
+        if(!$ok) return $errors;
 
-       return $users_a + $users_stats_a;
+        $this->db->insert('users', $users);
+        $this->db->insert('user_stats', $users_stats);
+
+       return array(
+           'email' => $users['email'],
+           'password' => $this->input->post('password')
+       );
     }
 
 }
