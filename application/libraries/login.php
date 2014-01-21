@@ -24,14 +24,20 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
 
-            $email=$this->input->post('email');
+        $email=$this->input->post('email');
+        $password=$this->input->post('password');
 
-            $password=hash('sha256', $this->input->post('password') . $this->input->post('email'));
+        $this->login($email, $password);
+    }
 
-            $result=$this->usersession_model->login($email,$password);
+    public function login($email, $password)
+    {
+        $result = $this->usersession_model->login($email, $password);
 
-            if(!$result) {
-                return $this->load->view('templates/login', NULL, TRUE);
-            }
+        if(!$result) {
+            return $this->load->view('templates/login', NULL, TRUE);
+        }
+
+        return true;
     }
 }

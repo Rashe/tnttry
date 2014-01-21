@@ -42,8 +42,8 @@ class Usersession_model extends CI_Model {
 
     function login($email,$password)
     {
-        $this->db->where("email",$email);
-        $this->db->where("password",$password);
+        $this->db->where("email", $email);
+        $this->db->where("password", hash('sha256', $password . $email));
 
         $query=$this->db->get("users");
         if($query->num_rows()>0)

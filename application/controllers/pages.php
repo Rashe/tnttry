@@ -19,9 +19,6 @@ class Pages extends CI_Controller {
         $this->load->library('login');
         $data['login_tpl'] = $this->login->index();
 
-        $this->load->library('registration');
-        $data['reg_tpl'] = $this->load->view('templates/registration', $data, TRUE);
-
         $this->load->helper('url');
 
         $this->load->view('templates/header', $data);

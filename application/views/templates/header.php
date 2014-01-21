@@ -14,7 +14,6 @@
     <div id="topHeader">
         <a href="<?php echo base_url(); ?>" class="logo">LOGO</a>
         <div class="loginWrapper"><?php if(isset($login_tpl)) print $login_tpl; ?></div>
-        <div class="registrationWrapper hidden" ><?php print $reg_tpl; ?></div>
     </div>
     <div id="bottomHeader">
         <nav>
