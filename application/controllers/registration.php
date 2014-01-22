@@ -43,12 +43,25 @@ class Registration extends CI_Controller {
                 }
                 $this->load->view('pages/registration', $data);
             } else {
-                $data['title'] = 'Successful registration';
                 $data['success'] = $ca;
-                $this->load->view('pages/success', $data);
+                $this->success($data);
             }
         }
         $this->load->view('templates/footer', $data);
+    }
+
+    public function success($data)
+    {
+        $data['title'] = 'Successful registration';
+
+        $this->load->library('login');
+        $login = $this->login->login($data['success']['email'], $data['success']['password']);
+
+        if($login){
+            $this->load->view('pages/success', $data);
+        } else {
+            $this->index();
+        }
     }
 
 }
