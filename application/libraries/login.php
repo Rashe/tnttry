@@ -1,43 +1,54 @@
 <?php
-class Login extends CI_Controller {
+class Login {
 
     public function __construct()
     {
-        parent::__construct();
-        $this->load->helper('url');
-        $this->load->helper('form');
-        $this->load->model('usersession_model');
+        $CI =& get_instance();
+
+        $CI->load->helper('url');
+        $CI->load->helper('form');
+        $CI->load->model('usersession_model');
     }
 
     public function index()
     {
-        // If user logged in show loggedin form
-        if(($this->session->userdata('user_name')!=""))
+        $CI =& get_instance();
+
+        if(($CI->session->userdata('user_name') != ''))
         {
-            $data['username'] = $this->session->userdata('user_name');
-            return $this->load->view('templates/logedin', $data, TRUE);
+            $data['username'] = $CI->session->userdata('user_name');
+            return $this->getUserpanel($data, true);
         }
 
-        $this->load->helper('form');
-        $this->load->library('form_validation');
+        $CI->load->helper('form');
+        $CI->load->library('form_validation');
 
-        $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
+        $CI->form_validation->set_rules('email', 'Email', 'required');
+        $CI->form_validation->set_rules('password', 'Password', 'required');
 
-        $email=$this->input->post('email');
-        $password=$this->input->post('password');
+        $email = $CI->input->post('email');
+        $password = $CI->input->post('password');
 
-        $this->login($email, $password);
+        return $this->login($email, $password);
     }
 
     public function login($email, $password)
     {
-        $result = $this->usersession_model->login($email, $password);
+        $CI =& get_instance();
 
-        if(!$result) {
-            return $this->load->view('templates/login', NULL, TRUE);
+        if(!$CI->usersession_model->login($email, $password)) {
+            return $this->getUserpanel(null, false);
         }
 
-        return true;
+        $data['username'] = $CI->session->userdata('user_name');
+        return $this->getUserpanel($data, true);
+    }
+
+    private function getUserpanel($data = array(), $loggedIn)
+    {
+        $CI =& get_instance();
+
+        $data['loggedIn'] = $loggedIn;
+        return $CI->load->view('templates/userpanel', $data, true);
     }
 }

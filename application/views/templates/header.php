@@ -21,7 +21,6 @@
                 <li><a href="<?php echo base_url(); ?>">Home</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/about">About</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/registration">Registration</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/login">Login</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/user_settings">Settings</a></li>
                 <li><?php echo anchor('logout', 'Logout'); ?></li>
                 <li><a href="<?php echo base_url(); ?>index.php/make_post">Make post</a></li>
