@@ -17,7 +17,6 @@ class Registration extends CI_Controller {
         }
 
         $data['title'] = 'Registration';
-        $this->load->view('templates/header', $data);
 
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required');
@@ -26,6 +25,7 @@ class Registration extends CI_Controller {
 
         $data['error'] = array();
         if ($this->form_validation->run() === FALSE){
+            $this->load->view('templates/header', $data);
             $this->load->view('pages/registration', $data);
         }
         else
@@ -36,26 +36,24 @@ class Registration extends CI_Controller {
                 foreach($ca as $caa){
                     $data['error'][] = $caa['msg'];
                 }
+                $this->load->view('templates/header', $data);
                 $this->load->view('pages/registration', $data);
             } else {
                 $data['success'] = $ca;
-                $this->success($data);
+                $login = $this->login_library->login($data['success']['email'], $data['success']['password']);
+
+                if($login){
+                    $data['title'] = 'Successful registration';
+                    $data['userpanel'] = $login;
+                    $this->load->view('templates/header', $data);
+                    $this->load->view('pages/success', $data);
+                } else {
+                    $this->index();
+                }
             }
         }
 
         $this->load->view('templates/footer');
-    }
-
-    public function success($data)
-    {
-        $login = $this->login_library->login($data['success']['email'], $data['success']['password']);
-
-        if($login){
-            $data['title'] = 'Successful registration';
-            $this->load->view('pages/success', $data);
-        } else {
-            $this->index();
-        }
     }
 
 }
