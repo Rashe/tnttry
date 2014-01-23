@@ -16,10 +16,8 @@ class Pages extends CI_Controller {
 
         $data['title'] = ucfirst($page); // Capitalize the first letter
 
-        $this->load->library('login');
-        $data['login_tpl'] = $this->login->index();
-
-        $this->load->helper('url');
+        $this->load->library('login_library');
+        $data['userpanel'] = $this->login_library->index();
 
         $this->load->view('templates/header', $data);
         $this->load->view('pages/'.$page, $data);

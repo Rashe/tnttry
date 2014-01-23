@@ -8,77 +8,77 @@ $(document).ready(function(){
 /**
  * Login
  */
-(function(){
-    var Login = function(){
-        var _login = this;
-
-        var settings = {
-            dev: false
-        }
-
-        var selectors = {
-            wrapper:        '.loginWrapper',
-            form:           '#login-form',
-            submitBtn:      '#login-form input[type="submit"]',
-            emailInput:     '#login-form input[type="email"]',
-            passwordInput:  '#login-form input[type="password"]'
-        };
-
-        var classes = {
-            hidden: 'hidden'
-        }
-
-        var texts = {
-
-        };
-
-        this.init = function(){
-            _login.dev();
-            _login.submit();
-        };
-
-        this.dev = function(){
-            if(settings.dev){
-                $(selectors.regFormWrap).removeClass(classes.hidden);
-            }
-        };
-
-        /**
-         * Submit login
-         */
-        this.submit = function(){
-            $(selectors.submitBtn).click(function(e){
-                e.preventDefault();
-                $.ajax({
-//                    type: 'POST',
-                    url: 'login',
-                    data: {
-                        email: $(selectors.emailInput).val(),
-                        password: $(selectors.passwordInput).val()
-                    },
-                    beforeSend: function( xhr ){
-                        $(selectors.wrapper).addClass('ajaxLoader');
-                        $(selectors.form).addClass('hidden');
-                    },
-                    success: function(data, textStatus, jqXHR){
-                        var response = $.parseJSON(data);
-
-                        $(selectors.wrapper).removeClass('ajaxLoader');
-                        document.cookie="username=John Smith; expires=Thu, 18 Dec 2013 12:00:00 GMT; path=/";
-                        if(response.login == 1){
-                            location.reload();
-                        } else {
-                            $(selectors.form).removeClass('hidden');
-                        }
-                    }
-
-                });
-            });
-        };
-    };
-
-    window.Login = new Login();
-})();
+//(function(){
+//    var Login = function(){
+//        var _login = this;
+//
+//        var settings = {
+//            dev: false
+//        }
+//
+//        var selectors = {
+//            wrapper:        '.loginWrapper',
+//            form:           '#login-form',
+//            submitBtn:      '#login-form input[type="submit"]',
+//            emailInput:     '#login-form input[type="email"]',
+//            passwordInput:  '#login-form input[type="password"]'
+//        };
+//
+//        var classes = {
+//            hidden: 'hidden'
+//        }
+//
+//        var texts = {
+//
+//        };
+//
+//        this.init = function(){
+//            _login.dev();
+//            _login.submit();
+//        };
+//
+//        this.dev = function(){
+//            if(settings.dev){
+//                $(selectors.regFormWrap).removeClass(classes.hidden);
+//            }
+//        };
+//
+//        /**
+//         * Submit login
+//         */
+//        this.submit = function(){
+//            $(selectors.submitBtn).click(function(e){
+//                e.preventDefault();
+//                $.ajax({
+////                    type: 'POST',
+//                    url: 'login',
+//                    data: {
+//                        email: $(selectors.emailInput).val(),
+//                        password: $(selectors.passwordInput).val()
+//                    },
+//                    beforeSend: function( xhr ){
+//                        $(selectors.wrapper).addClass('ajaxLoader');
+//                        $(selectors.form).addClass('hidden');
+//                    },
+//                    success: function(data, textStatus, jqXHR){
+//                        var response = $.parseJSON(data);
+//
+//                        $(selectors.wrapper).removeClass('ajaxLoader');
+//                        document.cookie="username=John Smith; expires=Thu, 18 Dec 2013 12:00:00 GMT; path=/";
+//                        if(response.login == 1){
+//                            location.reload();
+//                        } else {
+//                            $(selectors.form).removeClass('hidden');
+//                        }
+//                    }
+//
+//                });
+//            });
+//        };
+//    };
+//
+//    window.Login = new Login();
+//})();
 
 /**
  * After Login

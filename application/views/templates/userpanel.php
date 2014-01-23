@@ -1,7 +1,7 @@
 <?php
 if($loggedIn) {
 
-    echo $username . ' | New Posts | Profile | <input id="logout" type="submit" name="submit" value="Logout" />';
+    echo $username . ' | New Posts | Profile | <a id="logout" href="'. base_url() . 'index.php/logout">Logout</a>';
 
 } else {
 

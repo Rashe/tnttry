@@ -1,5 +1,5 @@
 <?php
-class Login {
+class Login_library {
 
     private $CI;
 
@@ -7,7 +7,7 @@ class Login {
     {
         $this->CI =& get_instance();
 
-        $this->CI->load->helper(array('url', 'form'));
+        $this->CI->load->helper('form');
         $this->CI->load->model('usersession_model');
     }
 
@@ -19,15 +19,7 @@ class Login {
             return $this->getUserpanel($data, true);
         }
 
-        $this->CI->load->library('form_validation');
-
-        $this->CI->form_validation->set_rules('email', 'Email', 'required');
-        $this->CI->form_validation->set_rules('password', 'Password', 'required');
-
-        $email = $this->CI->input->post('email');
-        $password = $this->CI->input->post('password');
-
-        return $this->login($email, $password);
+        return $this->getUserpanel(null, false);
     }
 
     public function login($email, $password)

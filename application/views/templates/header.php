@@ -13,7 +13,7 @@
 <header>
     <div id="topHeader">
         <a href="<?php echo base_url(); ?>" class="logo">LOGO</a>
-        <div class="loginWrapper"><?php if(isset($login_tpl)) print $login_tpl; ?></div>
+        <div class="loginWrapper"><?php if(isset($userpanel)) print $userpanel; ?></div>
     </div>
     <div id="bottomHeader">
         <nav>
@@ -22,7 +22,6 @@
                 <li><a href="<?php echo base_url(); ?>index.php/about">About</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/registration">Registration</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/user_settings">Settings</a></li>
-                <li><?php echo anchor('logout', 'Logout'); ?></li>
                 <li><a href="<?php echo base_url(); ?>index.php/make_post">Make post</a></li>
             </ul>
         </nav>

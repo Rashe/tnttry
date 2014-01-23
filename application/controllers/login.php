@@ -4,15 +4,16 @@ class Login extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('login');
+        $this->load->library('login_library');
     }
 
     public function index()
     {
-        if(isset($_GET['logout'])){
-            $this->session->sess_destroy();
-        }
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
 
-        $this->login->index();
+        $this->login_library->login($email, $password);
+
+        redirect();
     }
 }
