@@ -1,3 +1,14 @@
+$(window).load(function () {
+    //masonry
+    var $container = $('#container');
+// initialize
+    $container.masonry({
+//        columnWidth: 300,
+        itemSelector: '.item'
+    });
+});
+
+
 $(document).ready(function(){
     window.Login.init();
     window.AfterLogin.init();
@@ -6,13 +17,6 @@ $(document).ready(function(){
 
 
 
-    //masonry
-    var $container = $('#container');
-// initialize
-    $container.masonry({
-//        columnWidth: 300,
-        itemSelector: '.item'
-    });
 
 });
 
