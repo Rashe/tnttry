@@ -73,7 +73,7 @@ section#main{
 .loginWrapper #loginFgpass{
     position: absolute;
     font-size: 12px;
-    right: 86px;
+    right: 0px;
     top: 29px;
 }
 
@@ -118,6 +118,35 @@ header{
 {
     display: inline-block;
 }
+
+#topHeader .reg_button a{
+    padding: 6px 21px;
+    border-radius: 4px;
+    margin-right: 14px;
+    color: #ffffff;
+
+
+    background: #b5c176;
+    background: -moz-linear-gradient(top, #b5c176 0%, #aab95e 23%, #87a00e 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #b5c176), color-stop(23%, #aab95e), color-stop(100%, #87a00e));
+    background: -webkit-linear-gradient(top, #b5c176 0%, #aab95e 23%, #87a00e 100%);
+    background: -o-linear-gradient(top, #b5c176 0%, #aab95e 23%, #87a00e 100%);
+    background: -ms-linear-gradient(top, #b5c176 0%, #aab95e 23%, #87a00e 100%);
+    background: linear-gradient(to bottom, #b5c176 0%, #aab95e 23%, #87a00e 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5c176', endColorstr='#87a00e', GradientType=0 );
+}
+
+#topHeader .reg_button a:hover{
+    background: #b5c176;
+    background: -moz-linear-gradient(45deg, #b5c176 0%, #aab95e 23%, #87a00e 100%);
+    background: -webkit-gradient(left bottom, right top, color-stop(0%, #b5c176), color-stop(23%, #aab95e), color-stop(100%, #87a00e));
+    background: -webkit-linear-gradient(45deg, #b5c176 0%, #aab95e 23%, #87a00e 100%);
+    background: -o-linear-gradient(45deg, #b5c176 0%, #aab95e 23%, #87a00e 100%);
+    background: -ms-linear-gradient(45deg, #b5c176 0%, #aab95e 23%, #87a00e 100%);
+    background: linear-gradient(45deg, #b5c176 0%, #aab95e 23%, #87a00e 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5c176', endColorstr='#87a00e', GradientType=1 );
+}
+
 
 
 #topHeader .loginWrapper .regLink{
@@ -186,6 +215,8 @@ header{
 
 #bottomHeader nav ul li{
     display: inline-block;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
 }
 
 #bottomHeader nav ul li a{
@@ -196,7 +227,7 @@ header{
     color: #c9c9c9;
     font-weight: 400;
     font-size: 15px;
-    line-height: 26px;
+    line-height: 29px;
     height: 30px;
 }
 
