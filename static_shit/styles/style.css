@@ -391,8 +391,10 @@ header {
     z-index: 5000;
     display: block;
     top: 20px;
-    width: 700px;
-    left: 141px;
+    width: 900px;
+    left: 33px;
+    background: #f3f3f3;
+    border-radius: 5px;
 }
 
 .black_overlay {
@@ -412,10 +414,42 @@ header {
 
 .cont_wrap {
     display: inline-block;
-    width: 500px;
+    width: 650px;
+}
+
+.item_opened .item_cont{
+    background: transparent;
+    box-shadow: none;
 }
 
 .item_opened .user_data {
     display: inline-block;
     vertical-align: top;
+}
+
+.item_opened .text_data{
+    margin-left: 0;
+}
+
+.comment_area{
+    display: block;
+    width: 475px;
+    height: 50px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555;
+    vertical-align: middle;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.comment_form{
+    padding: 10px 0 14px 0px;
 }
