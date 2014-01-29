@@ -1,7 +1,7 @@
 <?php
 class Registration extends CI_Controller {
 
-    public function __construct()
+    function __construct()
     {
         parent::__construct();
 
@@ -9,10 +9,9 @@ class Registration extends CI_Controller {
         $this->load->model('registration_model');
     }
 
-    public function index()
+    function index()
     {
-        if(($this->session->userdata('user_name') != ''))
-        {
+        if(($this->session->userdata('user_name') != '')) {
             redirect();
         }
 
@@ -27,9 +26,7 @@ class Registration extends CI_Controller {
         if ($this->form_validation->run() === FALSE){
             $this->load->view('templates/header', $data);
             $this->load->view('pages/registration', $data);
-        }
-        else
-        {
+        } else {
             $ca = $this->registration_model->create_account();
 
             $data['success'] = $ca;

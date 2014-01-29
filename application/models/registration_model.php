@@ -2,12 +2,12 @@
 
 class Registration_model extends CI_Model {
 
-    public function __construct()
+    function __construct()
     {
         parent::__construct();
     }
 
-    public function create_account()
+    function create_account()
     {
         $users = array(
             'username' => $this->input->post('username'),
