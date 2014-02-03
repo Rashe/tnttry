@@ -4,7 +4,7 @@ class Login extends CI_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->load->library('login_library');
+        $this->load->library(array('login_library', 'user_agent'));
     }
 
     function index()
@@ -12,9 +12,9 @@ class Login extends CI_Controller {
         $email = $this->input->post('email');
         $password = $this->input->post('password');
 
-        $this->login_library->login($email, $password);
-
-        redirect();
+        $login = $this->login_library->login($email, $password);
+        $this->session->set_flashdata('login_fail', TRUE);
+        redirect($login ? '' : $this->agent->referrer());
     }
 
     function logout()
@@ -23,7 +23,7 @@ class Login extends CI_Controller {
             'user_id'    => '',
             'user_name'  => '',
             'user_email' => '',
-            'logged_in'  => false,
+            'logged_in'  => FALSE,
         ));
         $this->session->sess_destroy();
 

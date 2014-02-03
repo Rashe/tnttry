@@ -16,25 +16,26 @@ class Login_library {
         if(($this->CI->session->userdata('user_name') != ''))
         {
             $data['username'] = $this->CI->session->userdata('user_name');
-            return $this->getUserpanel($data, true);
+            return $this->getUserpanel($data, TRUE);
         }
 
-        return $this->getUserpanel(null, false);
+        $data['login_fail'] = $this->CI->session->flashdata('login_fail');
+        return $this->getUserpanel($data, FALSE);
     }
 
     public function login($email, $password)
     {
         if(!$this->CI->usersession_model->login($email, $password)) {
-            return $this->getUserpanel(null, false);
+            return FALSE;
         }
 
         $data['username'] = $this->CI->session->userdata('user_name');
-        return $this->getUserpanel($data, true);
+        return $this->getUserpanel($data, TRUE);
     }
 
     private function getUserpanel($data = array(), $loggedIn)
     {
         $data['loggedIn'] = $loggedIn;
-        return $this->CI->load->view('templates/userpanel', $data, true);
+        return $this->CI->load->view('templates/userpanel', $data, TRUE);
     }
 }

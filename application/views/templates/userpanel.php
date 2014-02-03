@@ -5,7 +5,7 @@ if($loggedIn) {
 
 } else {
 
-    echo '<div id="login_block">' . validation_errors() . '</div>' .
+    $o = '<div id="login_block">' . validation_errors() . '</div>' .
 
         form_open('login', array('id' => 'login-form')) .
 
@@ -23,7 +23,9 @@ if($loggedIn) {
             'placeholder' => 'Password'
         )) .
 
-        form_submit('submit', 'Login') .
+        form_submit('submit', 'Login');
 
-        form_close();
+        if($login_fail) $o .= 'Username or password is wrong. Try again or register.';
+
+        echo $o . form_close();
 }

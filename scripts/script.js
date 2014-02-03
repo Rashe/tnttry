@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    window.Login.init();
+//    window.Login.init();
     window.AfterLogin.init();
     window.Registration.init();
 
