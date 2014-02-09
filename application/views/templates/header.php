@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('styles/registration.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('styles/style.css'); ?>">
     <script type="text/javascript" src="<?php echo base_url('scripts/jquery-1.10.2.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('scripts/user.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('scripts/script.js'); ?>"></script>
 </head>
 <body>
