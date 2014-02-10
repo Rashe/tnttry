@@ -12,9 +12,7 @@ class Login extends CI_Controller {
         $email = $this->input->post('email');
         $password = $this->input->post('password');
 
-        $login = $this->login_library->login($email, $password);
-        $this->session->set_flashdata('login_fail', TRUE);
-        redirect($login ? '' : $this->agent->referrer());
+        echo $this->login_library->login($email, $password) ? 'success' : 'fail';
     }
 
     function logout()

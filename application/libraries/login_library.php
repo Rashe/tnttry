@@ -19,8 +19,7 @@ class Login_library {
             return $this->getUserpanel($data, TRUE);
         }
 
-        $data['login_fail'] = $this->CI->session->flashdata('login_fail');
-        return $this->getUserpanel($data, FALSE);
+        return $this->getUserpanel(null, FALSE);
     }
 
     public function login($email, $password)
@@ -28,9 +27,7 @@ class Login_library {
         if(!$this->CI->usersession_model->login($email, $password)) {
             return FALSE;
         }
-
-        $data['username'] = $this->CI->session->userdata('user_name');
-        return $this->getUserpanel($data, TRUE);
+        return TRUE;
     }
 
     private function getUserpanel($data = array(), $loggedIn)

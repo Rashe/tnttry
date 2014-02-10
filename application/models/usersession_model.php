@@ -40,7 +40,7 @@ class Usersession_model extends CI_Model {
         return $users_a + $users_stats_a;
     }
 
-    function login($email,$password)
+    function login($email, $password)
     {
         $this->db->where("email", $email);
         $this->db->where("password", hash('sha256', $password . $email));
@@ -59,10 +59,10 @@ class Usersession_model extends CI_Model {
                 );
             }
             $this->session->set_userdata($newdata);
-            return true;
+            return TRUE;
         }
 
-        return false;
+        return FALSE;
     }
 
 }

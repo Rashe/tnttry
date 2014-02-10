@@ -7,13 +7,17 @@ Devochki.user = (function($){
         var s = $.extend({
             email: '',
             password: '',
+            csrf: '',
             submitB: '',
+            loginError: '',
             errors: {}
         }, settings || {});
 
         s.email = $(s.email);
         s.password = $(s.password);
+        s.csrf = $(s.csrf);
         s.submitB = $(s.submitB);
+        s.loginError = $(s.loginError);
         s.form = s.submitB.closest('form');
 
         s.submitB.on('click', function(e){
@@ -31,11 +35,19 @@ Devochki.user = (function($){
                 return false;
             }
 
-            loginRequest(s.email, s.password);
+            loginRequest({
+                form: s.form,
+                email: s.email.val(),
+                password: s.password.val(),
+                csrf: s.csrf.val(),
+                errorL: s.loginError,
+                submitB: s.submitB
+            });
         });
 
         $('input', s.form).on('focus', function(){
             $(this).siblings('i.error').remove();
+            s.loginError.hide();
             !$('i.error', s.form).length && s.submitB.prop({ disabled: false });
         });
     };
@@ -56,8 +68,26 @@ Devochki.user = (function($){
         return !!emailError || !!passwordError ? [emailError, passwordError] : false;
     }
 
-    function loginRequest(email, password){
+    function loginRequest(o){
+        var s = $.extend({ form: '', email: '', password: '', csrf: '', errorL: '', submitB: '' }, o || {});
 
+        $.ajax({
+            type: 'POST',
+            url: s.form.attr('action'),
+            data: {
+                email: s.email,
+                password: s.password,
+                csrf_test_name: s.csrf
+            },
+            success: function(data){
+                if(data == 'success'){
+                    window.location = s.form.data('home');
+                } else {
+                    s.errorL.show();
+                    s.submitB.prop({ disabled: true });
+                }
+            }
+        });
     }
 
     return user;

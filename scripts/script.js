@@ -5,7 +5,9 @@ $(function(){
     !!loginForm && Devochki.user.init({
         email: $('[name="email"]', loginForm),
         password: $('[name="password"]', loginForm),
+        csrf: $('[name="csrf_test_name"]', loginForm),
         submitB: $('[name="submit"]', loginForm),
+        loginError: $('#loginError', loginForm),
         errors: {
             empty: 'This field is required',
             formatEmail: 'Format of email is not valid',

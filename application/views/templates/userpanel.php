@@ -5,7 +5,10 @@ if($loggedIn) {
 
 } else {
 
-    $o = form_open('login', array('id' => 'login-form')) .
+    echo form_open('login', array(
+            'id' => 'login-form',
+            'data-home' => index_page()
+        )) .
 
         anchor(base_url() . 'index.php/registration', 'Хочешь голых сисек маленький проказник? :)', array('class' => 'regLink', 'placeholder' => 'Хочешь голых сисек маленький проказник? :)')) .
 
@@ -25,9 +28,9 @@ if($loggedIn) {
         )) .
         form_fieldset_close() .
 
-        form_submit('submit', 'Login');
+        form_submit('submit', 'Login') .
 
-    if ($login_fail) $o .= 'Username or password is wrong. Try again or register.';
+        '<span id="loginError">Username or password is wrong. Try again or register.</span>' .
 
-    echo $o . form_close();
+        form_close();
 }

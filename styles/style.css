@@ -95,3 +95,7 @@ header{
     color: #262626;
 }
 
+#loginError {
+    display: none;
+}
+
