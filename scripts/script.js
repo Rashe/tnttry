@@ -7,12 +7,7 @@ $(function(){
         password: $('[name="password"]', loginForm),
         csrf: $('[name="csrf_test_name"]', loginForm),
         submitB: $('[name="submit"]', loginForm),
-        loginError: $('#loginError', loginForm),
-        errors: {
-            empty: 'This field is required',
-            formatEmail: 'Format of email is not valid',
-            formatPassword: 'Password should be 5 - 10 chars'
-        }
+        loginError: $('#loginError', loginForm)
     });
 
 });

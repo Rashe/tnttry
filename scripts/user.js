@@ -9,8 +9,7 @@ Devochki.user = (function($){
             password: '',
             csrf: '',
             submitB: '',
-            loginError: '',
-            errors: {}
+            loginError: ''
         }, settings || {});
 
         s.email = $(s.email);
@@ -25,14 +24,10 @@ Devochki.user = (function($){
 
             var notValid = validation(s.email, s.password);
             if(notValid){
-                !!notValid[0] &&
-                    s.email.closest('fieldset').append('<i class="error">' + s.errors[notValid[0]] + '</i>');
-
-                !!notValid[1] &&
-                    s.password.closest('fieldset').append('<i class="error">' + s.errors[notValid[1]] + '</i>');
-
+                !!notValid[0] && setError(s.email, notValid[0]);
+                !!notValid[1] && setError(s.password, notValid[1]);
                 s.submitB.prop({ disabled: true });
-                return false;
+                return;
             }
 
             loginRequest({
@@ -55,17 +50,21 @@ Devochki.user = (function($){
     function validation(email, password){
         var emailRegexp = /^[\w\d._-]+@[\w\d.-]+\.[\w]{2,4}$/,
             passwordRegexp = /^[0-9a-z]{5,10}$/i,
-            emailError = false, passwordError = false;
+            emailError = '', passwordError = '';
 
         email.val($.trim(email.val()));
 
         if(email.val() == '') emailError = 'empty';
         if(password.val() == '') passwordError = 'empty';
 
-        if(!emailError && !emailRegexp.test(email.val())) emailError = 'formatEmail';
-        if(!passwordError && !passwordRegexp.test(password.val())) passwordError = 'formatPassword';
+        if(!emailError && !emailRegexp.test(email.val())) emailError = 'format';
+        if(!passwordError && !passwordRegexp.test(password.val())) passwordError = 'format';
 
         return !!emailError || !!passwordError ? [emailError, passwordError] : false;
+    }
+
+    function setError(e, err){
+        e.closest('fieldset').append('<i class="error">' + e.data(err) + '</i>');
     }
 
     function loginRequest(o){

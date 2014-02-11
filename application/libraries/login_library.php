@@ -27,7 +27,8 @@ class Login_library {
         if(!$this->CI->usersession_model->login($email, $password)) {
             return FALSE;
         }
-        return TRUE;
+        $data['username'] = $this->CI->session->userdata('user_name');
+        return $this->getUserpanel($data, TRUE);
     }
 
     private function getUserpanel($data = array(), $loggedIn)

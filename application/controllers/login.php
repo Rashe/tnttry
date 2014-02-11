@@ -9,8 +9,8 @@ class Login extends CI_Controller {
 
     function index()
     {
-        $email = $this->input->post('email');
-        $password = $this->input->post('password');
+        $email = $this->input->post('email', TRUE);
+        $password = $this->input->post('password', TRUE);
 
         echo $this->login_library->login($email, $password) ? 'success' : 'fail';
     }

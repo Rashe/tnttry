@@ -7,7 +7,7 @@ if($loggedIn) {
 
     echo form_open('login', array(
             'id' => 'login-form',
-            'data-home' => index_page()
+            'data-home' => ''
         )) .
 
         anchor(base_url() . 'index.php/registration', 'Хочешь голых сисек маленький проказник? :)', array('class' => 'regLink', 'placeholder' => 'Хочешь голых сисек маленький проказник? :)')) .
@@ -16,7 +16,9 @@ if($loggedIn) {
         form_input(array(
             'name' => 'email',
             'type' => 'email',
-            'placeholder' => 'Email'
+            'placeholder' => 'Email',
+            'data-empty' => 'This field is required',
+            'data-format' => 'Format of email is not valid'
         )) .
         form_fieldset_close() .
 
@@ -24,7 +26,9 @@ if($loggedIn) {
         form_input(array(
             'name' => 'password',
             'type' => 'password',
-            'placeholder' => 'Password'
+            'placeholder' => 'Password',
+            'data-empty' => 'This field is required',
+            'data-format' => 'Password should be 5 - 10 chars'
         )) .
         form_fieldset_close() .
 
