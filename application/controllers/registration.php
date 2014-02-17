@@ -6,7 +6,7 @@ class Registration extends CI_Controller {
         parent::__construct();
 
         $this->load->library(array('form_validation', 'login_library'));
-        $this->load->model('user_model');
+        $this->load->model(array('user_model', 'userstats_model'));
     }
 
     function index()
@@ -17,10 +17,16 @@ class Registration extends CI_Controller {
 
         $data['title'] = 'Registration';
 
-        $this->form_validation->set_rules('username', 'Username', 'required|callback_username_exists');
-        $this->form_validation->set_rules('email', 'Email', 'required|callback_email_exists');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[4]|max_length[16]');
-        $this->form_validation->set_rules('tc', 'T&C', 'required');
+        $this->form_validation->set_rules(array(
+            array('field' => 'username', 'label' => 'Username',
+                'rules' => 'trim|required|callback_username_exists|xss_clean'),
+            array('field' => 'email', 'label' => 'Email',
+                'rules' => 'trim|required|valid_email|callback_email_exists'),
+            array('field' => 'password', 'label' => 'Password',
+                'rules' => 'required|min_length[5]|max_length[20]'),
+            array('field' => 'tc', 'label' => 'T&C', 'rules' => 'required')
+        ));
+
         $this->form_validation->set_error_delimiters('<i class="error">', '</i>');
 
         if ($this->form_validation->run() === FALSE){
@@ -28,6 +34,7 @@ class Registration extends CI_Controller {
             $this->load->view('pages/registration', $data);
         } else {
             $ca = $this->user_model->create_account();
+            $this->userstats_model->add_user();
 
             $data['success'] = $ca;
             $login = $this->login_library->login($data['success']['email'], $data['success']['password']);

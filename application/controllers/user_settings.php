@@ -4,9 +4,7 @@ class User_settings extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->helper('url');
-        $this->load->helper('form');
-        $this->load->model(array('user_model', 'userinfo_model'));
+        $this->load->model('user_model');
     }
 
     public function index()
@@ -34,7 +32,7 @@ class User_settings extends CI_Controller {
         if ($this->form_validation->run() === FALSE)
         {
 
-            $data['userall']=$this->userinfo_model->get_alluserdata();
+            $data['userall']=$this->user_model->get_userdata();
 
             $this->load->view('templates/user_settings', $data);
         }

@@ -18,10 +18,6 @@ class User_model extends CI_Model {
             'password' => hash('sha256', $password . $email)
         ));
 
-        $this->db->insert('user_stats', array(
-            'username' => $username
-        ));
-
         return array(
             'email'    => $email,
             'password' => $password
@@ -62,5 +58,12 @@ class User_model extends CI_Model {
             return true;
         }
         return false;
+    }
+
+    function get_userdata()
+    {
+        $username = $this->session->userdata('user_name');
+        $u = $this->db->get_where('users', array('username' => $username));
+        return $u->result_array();
     }
 }
