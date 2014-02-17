@@ -6,7 +6,7 @@ class Registration extends CI_Controller {
         parent::__construct();
 
         $this->load->library(array('form_validation', 'login_library'));
-        $this->load->model('registration_model');
+        $this->load->model('user_model');
     }
 
     function index()
@@ -27,7 +27,7 @@ class Registration extends CI_Controller {
             $this->load->view('templates/header', $data);
             $this->load->view('pages/registration', $data);
         } else {
-            $ca = $this->registration_model->create_account();
+            $ca = $this->user_model->create_account();
 
             $data['success'] = $ca;
             $login = $this->login_library->login($data['success']['email'], $data['success']['password']);
@@ -55,7 +55,7 @@ class Registration extends CI_Controller {
 
     private function exists($input, $name){
         $exist = $name . '_exists';
-        if ($this->registration_model->$exist($input)) {
+        if ($this->user_model->$exist($input)) {
             $this->form_validation->set_message($exist, ucfirst($name) . ' "' . $input . '" already exists!');
             return false;
         }

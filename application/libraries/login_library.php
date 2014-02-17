@@ -8,13 +8,12 @@ class Login_library {
         $this->CI =& get_instance();
 
         $this->CI->load->helper('form');
-        $this->CI->load->model('usersession_model');
+        $this->CI->load->model('user_model');
     }
 
-    public function index()
+    public function userpanel()
     {
-        if(($this->CI->session->userdata('user_name') != ''))
-        {
+        if(($this->CI->session->userdata('user_name') != '')) {
             $data['username'] = $this->CI->session->userdata('user_name');
             return $this->getUserpanel($data, TRUE);
         }
@@ -24,7 +23,7 @@ class Login_library {
 
     public function login($email, $password)
     {
-        if(!$this->CI->usersession_model->login($email, $password)) {
+        if(!$this->CI->user_model->login($email, $password)) {
             return FALSE;
         }
         $data['username'] = $this->CI->session->userdata('user_name');

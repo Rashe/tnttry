@@ -6,11 +6,7 @@ class User_settings extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->helper('form');
-        $this->load->model('usersession_model');
-        $this->load->model('userinfo_model');
-
-
-
+        $this->load->model(array('user_model', 'userinfo_model'));
     }
 
     public function index()
@@ -47,7 +43,7 @@ class User_settings extends CI_Controller {
 
             $password=hash('sha256', $this->input->post('password') . $this->input->post('email'));
 
-            $this->usersession_model->update_settings();
+            $this->user_model->create_account();
             $this->load->view('pages/home');
 //            $this->load->view('registration/success', $data);
         }
