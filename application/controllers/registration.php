@@ -25,9 +25,7 @@ class Registration extends CI_Controller {
             array('field' => 'password', 'label' => 'Password',
                 'rules' => 'required|min_length[5]|max_length[20]'),
             array('field' => 'tc', 'label' => 'T&C', 'rules' => 'required')
-        ));
-
-        $this->form_validation->set_error_delimiters('<i class="error">', '</i>');
+        ))->set_error_delimiters('<i class="error">', '</i>');
 
         if ($this->form_validation->run() === FALSE){
             $this->load->view('templates/header', $data);
@@ -63,7 +61,7 @@ class Registration extends CI_Controller {
     private function exists($input, $name){
         $exist = $name . '_exists';
         if ($this->user_model->$exist($input)) {
-            $this->form_validation->set_message($exist, ucfirst($name) . ' "' . $input . '" already exists!');
+            $this->form_validation->set_message($exist, '%s "' . $input . '" already exists!');
             return false;
         }
         return true;
