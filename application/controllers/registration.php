@@ -19,11 +19,11 @@ class Registration extends CI_Controller {
 
         $this->form_validation->set_rules(array(
             array('field' => 'username', 'label' => 'Username',
-                'rules' => 'trim|required|callback_username_exists|xss_clean'),
+                'rules' => 'trim|required|callback_anti_hacking|xss_clean|callback_username_exists'),
             array('field' => 'email', 'label' => 'Email',
-                'rules' => 'trim|required|valid_email|callback_email_exists'),
+                'rules' => 'trim|required|valid_email|callback_anti_hacking|callback_email_exists'),
             array('field' => 'password', 'label' => 'Password',
-                'rules' => 'required|min_length[5]|max_length[20]'),
+                'rules' => 'required|min_length[5]|max_length[20]|callback_anti_hacking|xss_clean'),
             array('field' => 'tc', 'label' => 'T&C', 'rules' => 'required')
         ))->set_error_delimiters('<i class="error">', '</i>');
 
@@ -56,6 +56,14 @@ class Registration extends CI_Controller {
 
     function email_exists($email){
         return $this->exists($email, 'email');
+    }
+
+    function anti_hacking($input){
+        if($input != htmlspecialchars($input)){
+            $this->form_validation->set_message('anti_hacking', 'Do not hack me, please');
+            return false;
+        }
+        return true;
     }
 
     private function exists($input, $name){
