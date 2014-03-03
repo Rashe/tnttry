@@ -453,3 +453,12 @@ header {
 .comment_form{
     padding: 10px 0 14px 0px;
 }
+
+.item_opened .user_pic{
+    display: inline-block;
+}
+
+.item_opened .user_name{
+    display: inline-block;
+    vertical-align: top;
+}
