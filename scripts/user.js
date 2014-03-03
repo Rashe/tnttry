@@ -65,6 +65,7 @@ Devochki.user = (function($){
 
     function setError(e, err){
         e.closest('fieldset').append('<i class="error">' + e.data(err) + '</i>');
+//        e[0].setCustomValidity(e.data(err));
     }
 
     function loginRequest(o){

@@ -66,4 +66,25 @@ class User_model extends CI_Model {
         $u = $this->db->get_where('users', array('username' => $username));
         return $u->result_array();
     }
+
+    function change_userdata()
+    {
+        $username = $this->session->userdata('user_name');
+        $email    = $this->input->post('email', TRUE);
+        $password = $this->input->post('password', TRUE);
+
+        $this->db->update('users', array(
+            'email'    => $email,
+            'password' => hash('sha256', $password . $email)
+        ), array('username' => $username));
+
+        $this->session->set_userdata(array(
+            'user_email' => $email
+        ));
+
+        return array(
+            'email'    => $email,
+            'password' => $password
+        );
+    }
 }

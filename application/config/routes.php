@@ -38,6 +38,7 @@
 |
 */
 $route['make_post'] = 'make_post';
+$route['userdata'] = 'userdata';
 $route['registration'] = 'registration';
 $route['login'] = 'login';
 $route['logout'] = 'login/logout';
