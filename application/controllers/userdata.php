@@ -5,7 +5,7 @@ class Userdata extends CI_Controller {
     {
         parent::__construct();
 
-        $this->load->library('form_validation');
+        $this->load->library(array('form_validation', 'login_library'));
         $this->load->model('user_model');
     }
 
@@ -22,12 +22,13 @@ class Userdata extends CI_Controller {
                 'rules' => 'required|min_length[5]|max_length[20]|callback_anti_hacking|xss_clean')
         ))->set_error_delimiters('<i class="error">', '</i>');
 
-        if ($this->form_validation->run() === TRUE){
+        if ($this->form_validation->run() === true){
             $this->user_model->change_userdata();
         }
 
-        $data['title'] = 'Your userdata, ' . $this->session->userdata('user_name');
+        $data['title'] = 'Your settings, ' . $this->session->userdata('user_name');
         $data['email'] = $this->session->userdata('user_email');
+        $data['userpanel'] = $this->login_library->userpanel();
 
         $this->load->view('templates/header', $data);
         $this->load->view('pages/userdata', $data);
@@ -39,22 +40,20 @@ class Userdata extends CI_Controller {
 
     }
 
-    function email_exists($email){
-        return $this->exists($email, 'email');
-    }
-
-    function anti_hacking($input){
-        if($input != htmlspecialchars($input)){
-            $this->form_validation->set_message('anti_hacking', 'Do not hack me, please');
+    function email_exists($input)
+    {
+        if($input == $this->session->userdata('user_email')) return true;
+        if ($this->user_model->email_exists($input)) {
+            $this->form_validation->set_message('email_exists', '%s "' . $input . '" already exists!');
             return false;
         }
         return true;
     }
 
-    private function exists($input, $name){
-        $exist = $name . '_exists';
-        if ($this->user_model->$exist($input)) {
-            $this->form_validation->set_message($exist, '%s "' . $input . '" already exists!');
+    function anti_hacking($input)
+    {
+        if($input != htmlspecialchars($input)){
+            $this->form_validation->set_message('anti_hacking', 'Do not hack me, please');
             return false;
         }
         return true;

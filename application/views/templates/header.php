@@ -21,8 +21,11 @@
             <ul>
                 <li><a href="<?php echo base_url(); ?>">Home</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/about">About</a></li>
+                <?php if($loggedIn){ ?>
+                    <li><a href="<?php echo base_url(); ?>index.php/userdata">Your settings</a></li>
+                <?php } else { ?>
                 <li><a href="<?php echo base_url(); ?>index.php/registration">Registration</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/user_settings">Settings</a></li>
+                <?php } ?>
                 <li><a href="<?php echo base_url(); ?>index.php/make_post">Make post</a></li>
             </ul>
         </nav>

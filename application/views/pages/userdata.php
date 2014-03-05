@@ -1,5 +1,6 @@
 <?php
-echo form_open('userdata', array('id' => 'userdata')) .
+echo '<h1>' . $title . '</h1>' .
+form_open('userdata', array('id' => 'userdata')) .
 
     form_fieldset() .
     form_label('Email', 'email') .
