@@ -27,4 +27,12 @@ class Login extends CI_Controller {
 
         redirect();
     }
+
+    function forgot_password()
+    {
+        $username = $this->input->post('username', TRUE);
+        $email = $this->input->post('email', TRUE);
+
+        // todo: create new password and send email with it
+    }
 }

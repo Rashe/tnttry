@@ -22,7 +22,7 @@ Devochki.user = (function($){
         s.submitB.on('click', function(e){
             e.preventDefault();
 
-            var notValid = validation(s.email, s.password);
+            var notValid = validationLogin(s.email, s.password);
             if(notValid){
                 !!notValid[0] && setError(s.email, notValid[0]);
                 !!notValid[1] && setError(s.password, notValid[1]);
@@ -47,27 +47,6 @@ Devochki.user = (function($){
         });
     };
 
-    function validation(email, password){
-        var emailRegexp = /^[\w\d._-]+@[\w\d.-]+\.[\w]{2,4}$/,
-            passwordRegexp = /^[0-9a-z]{5,10}$/i,
-            emailError = '', passwordError = '';
-
-        email.val($.trim(email.val()));
-
-        if(email.val() == '') emailError = 'empty';
-        if(password.val() == '') passwordError = 'empty';
-
-        if(!emailError && !emailRegexp.test(email.val())) emailError = 'format';
-        if(!passwordError && !passwordRegexp.test(password.val())) passwordError = 'format';
-
-        return !!emailError || !!passwordError ? [emailError, passwordError] : false;
-    }
-
-    function setError(e, err){
-        e.closest('fieldset').append('<i class="error">' + e.data(err) + '</i>');
-//        e[0].setCustomValidity(e.data(err));
-    }
-
     function loginRequest(o){
         var s = $.extend({ form: '', email: '', password: '', csrf: '', errorL: '', submitB: '' }, o || {});
 
@@ -88,6 +67,42 @@ Devochki.user = (function($){
                 }
             }
         });
+    }
+
+    function validation(input, type){
+        var inputType = {
+                username: { _reqiured: true, _regexp: false, _trim: true },
+                password: { _reqiured: true, _regexp: /^[0-9a-z]{5,10}$/i, _trim: false },
+                email:    { _reqiured: true, _regexp: /^[\w\d._-]+@[\w\d.-]+\.[\w]{2,4}$/, _trim: true }
+            },
+            error = false;
+
+        if(!(type = inputType[type])) return false;
+
+        type._trim && input.val($.trim(input.val()));
+        if(type._reqiured && input.val() == '') error = 'empty';
+        if(!error && type._regexp && !type._regexp.test(input.val())) error = 'format';
+
+        return error;
+    }
+    function validationLogin(email, password){
+        email = validation(email, 'email');
+        password = validation(password, 'password');
+        return !!email || !!password ? [email, password] : false;
+    }
+    function validationForgotPassword(email, username){
+        email = validation(email, 'email');
+        username = validation(username, 'username');
+        return !!email || !!username ? [email, username] : false;
+    }
+
+    function setError(e, err){
+        e.closest('fieldset').append('<i class="error">' + e.data(err) + '</i>');
+//        e[0].setCustomValidity(e.data(err));
+    }
+
+    function getForgotPasswordForm(){
+        // todo: get forgot password form by ajax and replace login form
     }
 
     return user;

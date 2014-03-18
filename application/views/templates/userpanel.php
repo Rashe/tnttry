@@ -36,5 +36,7 @@ if($loggedIn) {
 
         '<span id="loginError">Username or password is wrong. Try again or register.</span>' .
 
-        form_close();
+        form_close() .
+
+    '<a href="#" id="forgotPassword">Forgot Your Password?</a>';
 }

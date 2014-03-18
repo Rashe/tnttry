@@ -35,11 +35,6 @@ class Userdata extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    function forgot_password()
-    {
-
-    }
-
     function email_exists($input)
     {
         if($input == $this->session->userdata('user_email')) return true;
