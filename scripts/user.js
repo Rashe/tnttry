@@ -72,7 +72,7 @@ Devochki.user = (function($){
     function validation(input, type){
         var inputType = {
                 username: { _reqiured: true, _regexp: false, _trim: true },
-                password: { _reqiured: true, _regexp: /^[0-9a-z]{5,10}$/i, _trim: false },
+                password: { _reqiured: true, _regexp: /^[0-9a-zA-Z]{5,10}$/, _trim: false },
                 email:    { _reqiured: true, _regexp: /^[\w\d._-]+@[\w\d.-]+\.[\w]{2,4}$/, _trim: true }
             },
             error = false;

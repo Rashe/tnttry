@@ -60,9 +60,9 @@ class User_model extends CI_Model {
         return false;
     }
 
-    function get_userdata()
+    function get_userdata($username = null)
     {
-        $username = $this->session->userdata('user_name');
+        $username = $username ? $username : $this->session->userdata('user_name');
         $u = $this->db->get_where('users', array('username' => $username));
         return $u->result_array();
     }

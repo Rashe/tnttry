@@ -4,7 +4,8 @@ class Login extends CI_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->load->library(array('login_library', 'user_agent'));
+        $this->load->library(array('login_library', 'user_agent', 'email'));
+        $this->load->model('user_model');
     }
 
     function index()
@@ -33,6 +34,23 @@ class Login extends CI_Controller {
         $username = $this->input->post('username', TRUE);
         $email = $this->input->post('email', TRUE);
 
-        // todo: create new password and send email with it
+        $userdata = $this->user_model->get_userdata($username);
+        if(!isset($userdata[0])) return; // todo: username does not exist
+        if($userdata[0]['email'] != $email) return; // todo: username or email is wrong
+
+        $this->email->from('my@devochki.com', 'Devochki site');
+        $this->email->to($email);
+        $this->email->subject('Your new password for Devochki site');
+        $this->email->message('Dear ' . $username . ', Your new password is ' . $this->generate_password());
+        $this->email->send();
+
+        echo $this->email->print_debugger(); // todo: remove this line after debugging
+    }
+
+    function generate_password($length = 8)
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $password = substr(str_shuffle($chars), mt_rand(0, strlen($chars) - $length), $length);
+        return $password;
     }
 }
