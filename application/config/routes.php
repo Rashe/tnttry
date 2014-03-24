@@ -42,6 +42,7 @@ $route['userdata'] = 'userdata';
 $route['registration'] = 'registration';
 $route['login'] = 'login';
 $route['logout'] = 'login/logout';
+$route['get_forgot_password'] = 'login/get_forgot_password';
 $route['user_settings'] = 'user_settings';
 $route['(:any)'] = 'pages/view/$1';
 $route['default_controller'] = 'pages/view';

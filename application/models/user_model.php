@@ -73,10 +73,7 @@ class User_model extends CI_Model {
         $email    = $this->input->post('email', TRUE);
         $password = $this->input->post('password', TRUE);
 
-        $this->db->update('users', array(
-            'email'    => $email,
-            'password' => hash('sha256', $password . $email)
-        ), array('username' => $username));
+        $this->update_userdata($username, $email, $password);
 
         $this->session->set_userdata(array(
             'user_email' => $email
@@ -86,5 +83,13 @@ class User_model extends CI_Model {
             'email'    => $email,
             'password' => $password
         );
+    }
+
+    function update_userdata($username, $email, $password)
+    {
+        $this->db->update('users', array(
+            'email'    => $email,
+            'password' => hash('sha256', $password . $email)
+        ), array('username' => $username));
     }
 }

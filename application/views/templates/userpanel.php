@@ -38,5 +38,5 @@ if($loggedIn) {
 
         form_close() .
 
-    '<a href="#" id="forgotPassword">Forgot Your Password?</a>';
+    '<a href="' . base_url() . 'index.php/get_forgot_password" id="forgotPassword">Forgot Your Password?</a>';
 }

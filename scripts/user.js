@@ -47,6 +47,15 @@ Devochki.user = (function($){
         });
     };
 
+    user.getForgotPasswordForm = function(url, fn){
+        $.ajax({
+            url: url,
+            success: function(form){
+                !!fn && typeof fn == 'function' && fn(form);
+            }
+        });
+    };
+
     function loginRequest(o){
         var s = $.extend({ form: '', email: '', password: '', csrf: '', errorL: '', submitB: '' }, o || {});
 
@@ -99,10 +108,6 @@ Devochki.user = (function($){
     function setError(e, err){
         e.closest('fieldset').append('<i class="error">' + e.data(err) + '</i>');
 //        e[0].setCustomValidity(e.data(err));
-    }
-
-    function getForgotPasswordForm(){
-        // todo: get forgot password form by ajax and replace login form
     }
 
     return user;

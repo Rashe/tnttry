@@ -10,4 +10,12 @@ $(function(){
         loginError: $('#loginError', loginForm)
     });
 
+    $('#forgotPassword').on('click', function(e){
+        e.preventDefault();
+        var _this = $(this);
+        Devochki.user.getForgotPasswordForm(_this.attr('href'), function(formFP){
+            $('.loginWrapper').append(formFP);
+            _this.add(loginForm).hide();
+        });
+    });
 });
