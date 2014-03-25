@@ -18,4 +18,9 @@ $(function(){
             _this.add(loginForm).hide();
         });
     });
+
+    $('submit', '#forgotPassword-form').on('click', function(e){
+        e.preventDefault();
+
+    });
 });

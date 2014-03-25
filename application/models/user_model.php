@@ -46,20 +46,6 @@ class User_model extends CI_Model {
         return FALSE;
     }
 
-    function username_exists($username){
-        if($this->db->get_where('users', array('username' => $username))->num_rows){
-            return true;
-        }
-        return false;
-    }
-
-    function email_exists($email){
-        if($this->db->get_where('users', array('email' => $email))->num_rows){
-            return true;
-        }
-        return false;
-    }
-
     function get_userdata($username = null)
     {
         $username = $username ? $username : $this->session->userdata('user_name');
@@ -85,7 +71,44 @@ class User_model extends CI_Model {
         );
     }
 
-    function update_userdata($username, $email, $password)
+    function new_password(){
+        $username = $this->input->post('username', TRUE);
+        $email = $this->input->post('email', TRUE);
+
+        $password = $this->generate_password();
+        $this->user_model->update_userdata($username, $email, $password);
+
+        return array(
+            'username' => $username,
+            'email'    => $email,
+            'password' => $password
+        );
+    }
+
+    function username_exists($username)
+    {
+        if($this->db->get_where('users', array('username' => $username))->num_rows){
+            return true;
+        }
+        return false;
+    }
+
+    function email_exists($email)
+    {
+        if($this->db->get_where('users', array('email' => $email))->num_rows){
+            return true;
+        }
+        return false;
+    }
+
+    private function generate_password($length = 8)
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $password = substr(str_shuffle($chars), mt_rand(0, strlen($chars) - $length), $length);
+        return $password;
+    }
+
+    private function update_userdata($username, $email, $password)
     {
         $this->db->update('users', array(
             'email'    => $email,

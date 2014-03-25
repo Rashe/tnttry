@@ -35,11 +35,61 @@ class Userdata extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    function get_forgot_password()
+    {
+        $this->load->view('templates/forgot_password');
+    }
+
+    function forgot_password()
+    {
+        $this->form_validation->set_rules(array(
+            array('field' => 'username', 'label' => 'Username',
+                'rules' => 'trim|required|callback_anti_hacking|xss_clean|callback_username_exists'),
+            array('field' => 'email', 'label' => 'Email',
+                'rules' => 'trim|required|valid_email|callback_anti_hacking|callback_email_username[username]')
+        ))->set_error_delimiters('<i class="error">', '</i>');
+
+        if ($this->form_validation->run() === true){
+            $userdata = $this->user_model->new_password();
+
+            $this->email->from('my@devochki.com', 'Devochki site');
+            $this->email->to($userdata['email']);
+            $this->email->subject('Your new password for Devochki site');
+            $this->email->message('Dear ' . $userdata['username'] . ', Your new password is ' . $userdata['password']);
+            $this->email->send();
+
+            echo $this->email->print_debugger(); // todo: remove this line after debugging
+
+            return true;
+        }
+
+        return false;
+    }
+
+    function username_exists($input)
+    {
+        if (!$this->user_model->username_exists($input)) {
+            $this->form_validation->set_message('username_exists', 'Username %s "' . $input . '" does not exist!');
+            return false;
+        }
+        return true;
+    }
+
     function email_exists($input)
     {
         if($input == $this->session->userdata('user_email')) return true;
         if ($this->user_model->email_exists($input)) {
             $this->form_validation->set_message('email_exists', '%s "' . $input . '" already exists!');
+            return false;
+        }
+        return true;
+    }
+
+    function email_username($input, $username)
+    {
+        $userdata = $this->user_model->get_userdata($username);
+        if($userdata[0]['email'] != $input) {
+            $this->form_validation->set_message('email_username', 'Email %s "' . $input . '" does not !');
             return false;
         }
         return true;
