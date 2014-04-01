@@ -34,7 +34,7 @@ if($loggedIn) {
 
         form_submit('submit', 'Login') .
 
-        '<span id="loginError">Username or password is wrong. Try again or register.</span>' .
+        '<span id="loginError">Email or password is wrong. Try again or register.</span>' .
 
         form_close() .
 

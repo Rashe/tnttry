@@ -1,80 +1,50 @@
 var Devochki = Devochki ? Devochki : {};
 
 Devochki.user = (function($){
-    var user = {};
-
-    user.init = function(settings){
+    function formSubmit(typeForm, settings){
         var s = $.extend({
-            email: '',
-            password: '',
-            csrf: '',
-            submitB: '',
-            loginError: ''
+            form: '', user_pass: '', email: '', csrf: '', submitB: '', errorM: '', successFn: ''
         }, settings || {});
 
-        s.email = $(s.email);
-        s.password = $(s.password);
-        s.csrf = $(s.csrf);
-        s.submitB = $(s.submitB);
-        s.loginError = $(s.loginError);
-        s.form = s.submitB.closest('form');
+        var typeInput = typeForm == 'login' ? 'password' : 'username';
 
-        s.submitB.on('click', function(e){
+        s.form.on('submit', function(e){
             e.preventDefault();
 
-            var notValid = validationLogin(s.email, s.password);
-            if(notValid){
-                !!notValid[0] && setError(s.email, notValid[0]);
-                !!notValid[1] && setError(s.password, notValid[1]);
+            var notValidEmail = validation(s.email, 'email'),
+                notValidUserPass = validation(s.user_pass, typeInput);
+            if(notValidEmail || notValidUserPass){
+                !!notValidEmail && setError(s.email, notValidEmail);
+                !!notValidUserPass && setError(s.user_pass, notValidUserPass);
                 s.submitB.prop({ disabled: true });
                 return;
             }
 
-            loginRequest({
-                form: s.form,
+            var data = {
                 email: s.email.val(),
-                password: s.password.val(),
-                csrf: s.csrf.val(),
-                errorL: s.loginError,
-                submitB: s.submitB
+                csrf_test_name: s.csrf.val()
+            };
+            data[typeInput] = s.user_pass.val();
+
+            $.ajax({
+                type: 'POST',
+                url: s.form.attr('action'),
+                data: data,
+                success: function(response){
+                    if(response == 'success'){
+                        typeof s.successFn == 'function' && s.successFn();
+                    } else {
+                        s.errorM.show();
+                        s.submitB.prop({ disabled: true });
+                    }
+                }
             });
         });
 
         $('input', s.form).on('focus', function(){
             $(this).siblings('i.error').remove();
-            s.loginError.hide();
+            s.errorM.hide();
             !$('i.error', s.form).length && s.submitB.prop({ disabled: false });
-        });
-    };
-
-    user.getForgotPasswordForm = function(url, fn){
-        $.ajax({
-            url: url,
-            success: function(form){
-                !!fn && typeof fn == 'function' && fn(form);
-            }
-        });
-    };
-
-    function loginRequest(o){
-        var s = $.extend({ form: '', email: '', password: '', csrf: '', errorL: '', submitB: '' }, o || {});
-
-        $.ajax({
-            type: 'POST',
-            url: s.form.attr('action'),
-            data: {
-                email: s.email,
-                password: s.password,
-                csrf_test_name: s.csrf
-            },
-            success: function(data){
-                if(data == 'success'){
-                    window.location = s.form.data('home');
-                } else {
-                    s.errorL.show();
-                    s.submitB.prop({ disabled: true });
-                }
-            }
         });
     }
 
@@ -94,21 +64,20 @@ Devochki.user = (function($){
 
         return error;
     }
-    function validationLogin(email, password){
-        email = validation(email, 'email');
-        password = validation(password, 'password');
-        return !!email || !!password ? [email, password] : false;
-    }
-    function validationForgotPassword(email, username){
-        email = validation(email, 'email');
-        username = validation(username, 'username');
-        return !!email || !!username ? [email, username] : false;
-    }
 
     function setError(e, err){
         e.closest('fieldset').append('<i class="error">' + e.data(err) + '</i>');
 //        e[0].setCustomValidity(e.data(err));
     }
 
-    return user;
+    return {
+        login: function (settings) { formSubmit('login', settings); },
+        forgotPassword: function (settings) { formSubmit('forgotPassword', settings); },
+        getForgotPasswordForm: function (url, fn) {
+            $.ajax({
+                url: url,
+                success: function (form) { !!fn && typeof fn == 'function' && fn(form); }
+            });
+        }
+    };
 })(jQuery);
