@@ -5,7 +5,7 @@ class Userdata extends CI_Controller {
     {
         parent::__construct();
 
-        $this->load->library(array('form_validation', 'login_library'));
+        $this->load->library(array('form_validation', 'login_library', 'email'));
         $this->load->model('user_model');
     }
 
@@ -46,7 +46,7 @@ class Userdata extends CI_Controller {
             array('field' => 'username', 'label' => 'Username',
                 'rules' => 'trim|required|callback_anti_hacking|xss_clean|callback_username_exists'),
             array('field' => 'email', 'label' => 'Email',
-                'rules' => 'trim|required|valid_email|callback_anti_hacking|callback_email_username[username]')
+                'rules' => 'trim|required|valid_email|callback_anti_hacking|callback_email_username[' . $this->input->post('username', true) . ']')
         ))->set_error_delimiters('<i class="error">', '</i>');
 
         if ($this->form_validation->run() === true){
@@ -56,9 +56,10 @@ class Userdata extends CI_Controller {
             $this->email->to($userdata['email']);
             $this->email->subject('Your new password for Devochki site');
             $this->email->message('Dear ' . $userdata['username'] . ', Your new password is ' . $userdata['password']);
-            $this->email->send();
 
-            echo $this->email->print_debugger(); // todo: remove this line after debugging
+            if(!$this->email->send()){
+                echo $this->email->print_debugger(); // todo: remove this line after debugging
+            }
 
             return true;
         }
@@ -88,10 +89,17 @@ class Userdata extends CI_Controller {
     function email_username($input, $username)
     {
         $userdata = $this->user_model->get_userdata($username);
-        if($userdata[0]['email'] != $input) {
-            $this->form_validation->set_message('email_username', 'Email %s "' . $input . '" does not !');
+
+        if(empty($userdata)) {
+            $this->form_validation->set_message('email_username', 'Check your username!');
             return false;
         }
+
+        if($userdata[0]['email'] != $input) {
+            $this->form_validation->set_message('email_username', 'Email %s "' . $input . '" is not ok!');
+            return false;
+        }
+
         return true;
     }
 
