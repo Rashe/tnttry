@@ -13,7 +13,7 @@ class Login extends CI_Controller {
         $email = $this->input->post('email', TRUE);
         $password = $this->input->post('password', TRUE);
 
-        echo $this->login_library->login($email, $password) ? 'success' : 'fail';
+        echo $this->login_library->login($email, $password) ? 'success' : json_encode('');
     }
 
     function logout()

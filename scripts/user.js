@@ -34,7 +34,13 @@ Devochki.user = (function($){
                     if(response == 'success'){
                         typeof s.successFn == 'function' && s.successFn();
                     } else {
-                        s.errorM.show();
+                        response = JSON.parse(response);
+                        if($.isArray(response) && (!!response[0] || !!response[1])){
+                            !!response[0] && s.user_pass.parent().append(response[0]);
+                            !!response[1] && s.email.parent().append(response[1]);
+                        } else {
+                            s.errorM.show();
+                        }
                         s.submitB.prop({ disabled: true });
                     }
                 }

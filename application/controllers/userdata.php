@@ -61,16 +61,16 @@ class Userdata extends CI_Controller {
                 echo $this->email->print_debugger(); // todo: remove this line after debugging
             }
 
-            return true;
+            echo 'success';
         }
 
-        return false;
+        echo json_encode(array(form_error('username'), form_error('email')));
     }
 
     function username_exists($input)
     {
         if (!$this->user_model->username_exists($input)) {
-            $this->form_validation->set_message('username_exists', 'Username %s "' . $input . '" does not exist!');
+            $this->form_validation->set_message('username_exists', '');
             return false;
         }
         return true;
@@ -89,17 +89,10 @@ class Userdata extends CI_Controller {
     function email_username($input, $username)
     {
         $userdata = $this->user_model->get_userdata($username);
-
-        if(empty($userdata)) {
-            $this->form_validation->set_message('email_username', 'Check your username!');
+        if(empty($userdata) || $userdata[0]['email'] != $input) {
+            $this->form_validation->set_message('email_username', '');
             return false;
         }
-
-        if($userdata[0]['email'] != $input) {
-            $this->form_validation->set_message('email_username', 'Email %s "' . $input . '" is not ok!');
-            return false;
-        }
-
         return true;
     }
 
