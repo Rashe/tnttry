@@ -5,7 +5,7 @@ class Userdata extends CI_Controller {
     {
         parent::__construct();
 
-        $this->load->library(array('form_validation', 'login_library', 'email'));
+        $this->load->library(array('form_validation', 'userpanel', 'email'));
         $this->load->model('user_model');
     }
 
@@ -28,7 +28,7 @@ class Userdata extends CI_Controller {
 
         $data['title'] = 'Your settings, ' . $this->session->userdata('user_name');
         $data['email'] = $this->session->userdata('user_email');
-        $data['userpanel'] = $this->login_library->userpanel();
+        $data['userpanel'] = $this->userpanel->getUserpanel();
 
         $this->load->view('templates/header', $data);
         $this->load->view('pages/userdata', $data);

@@ -5,7 +5,7 @@ class Registration extends CI_Controller {
     {
         parent::__construct();
 
-        $this->load->library(array('form_validation', 'login_library'));
+        $this->load->library(array('form_validation', 'userpanel'));
         $this->load->model(array('user_model', 'userstats_model'));
     }
 
@@ -28,6 +28,7 @@ class Registration extends CI_Controller {
         ))->set_error_delimiters('<i class="error">', '</i>');
 
         if ($this->form_validation->run() === FALSE){
+            $data['username'] = false;
             $this->load->view('templates/header', $data);
             $this->load->view('pages/registration', $data);
         } else {
@@ -35,11 +36,10 @@ class Registration extends CI_Controller {
             $this->userstats_model->add_user();
 
             $data['success'] = $ca;
-            $login = $this->login_library->login($data['success']['email'], $data['success']['password']);
 
-            if($login){
+            if($this->user_model->login($data['success']['email'], $data['success']['password'])){
                 $data['title'] = 'Successful registration';
-                $data['userpanel'] = $login;
+                $data['userpanel'] = $this->userpanel->getUserpanel();
                 $this->load->view('templates/header', $data);
                 $this->load->view('pages/success', $data);
             } else {

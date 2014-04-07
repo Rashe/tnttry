@@ -21,7 +21,7 @@
             <ul>
                 <li><a href="<?php echo base_url(); ?>">Home</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/about">About</a></li>
-                <?php if($loggedIn){ ?>
+                <?php if($username){ ?>
                     <li><a href="<?php echo base_url(); ?>index.php/userdata">Your settings</a></li>
                 <?php } else { ?>
                 <li><a href="<?php echo base_url(); ?>index.php/registration">Registration</a></li>

@@ -4,7 +4,6 @@ class Login extends CI_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->load->library('login_library');
         $this->load->model('user_model');
     }
 
@@ -13,7 +12,7 @@ class Login extends CI_Controller {
         $email = $this->input->post('email', TRUE);
         $password = $this->input->post('password', TRUE);
 
-        echo $this->login_library->login($email, $password) ? 'success' : json_encode('');
+        echo $this->user_model->login($email, $password) ? 'success' : json_encode(false);
     }
 
     function logout()

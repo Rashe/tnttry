@@ -14,7 +14,8 @@ class Make_post extends CI_Controller
     public function index()
     {
         if (($this->session->userdata('user_name') == "")) {
-            $this->load->view('templates/header');
+            $data['username'] = false;
+            $this->load->view('templates/header', $data);
             $this->load->view('pages/registration');
             $this->load->view('templates/footer');
             return;

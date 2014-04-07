@@ -1,5 +1,5 @@
 <?php
-if($loggedIn) {
+if($username) {
 
     echo $username . ' | New Posts | Profile | <a id="logout" href="'. base_url() . 'index.php/logout">Logout</a>';
 
